@@ -15,16 +15,21 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @can('permission-list')
                     <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.*')">
                         {{ __('Permissions') }}
                     </x-nav-link>
+                    @endcan
+                    @can('role-list')
                     <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
                         {{ __('Roles') }}
                     </x-nav-link>
+                     @endcan
+                    @can('user-list')
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                         {{ __('Users') }}
                     </x-nav-link>
-
+                     @endcan
 
                 </div>
             </div>

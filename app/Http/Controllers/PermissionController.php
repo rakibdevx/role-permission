@@ -7,6 +7,17 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+
+     public function __construct()
+    {
+        // Allow only users with specific permissions
+        $this->middleware('permission:permission-list|permission-create|permission-edit|permission-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:permission-create', ['only' => ['create','store']]);
+        $this->middleware('permission:permission-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:permission-delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -83,5 +94,11 @@ class PermissionController extends Controller
 
         return redirect()->route('permissions.index')
             ->with('success', 'Permission deleted successfully.');
+    }
+
+
+    public function add()
+    {
+        return 1+2;
     }
 }

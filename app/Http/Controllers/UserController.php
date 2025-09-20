@@ -8,6 +8,14 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+     public function __construct()
+    {
+        // Allow only users with specific permissions
+        $this->middleware('permission:user-list|permission-create|users-edit|users-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $users = User::with('roles')->get();
